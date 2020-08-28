@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        body
+        {
+            background-color: #E9E9E9;
+        }
+        #itemlist
+        {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            /* align-items: center; */
+            /* align-content: center; */
+            /* margin:20px; */
+            margin-left: 10px;
+        }
+
+        #itemlist div
+        {
+        margin-top:10px;
+        background-color: white;
+        margin-left: 5px;
+        /* padding: 4px; */
+        display: flex;
+        flex-direction: column;
+
+        }
+
+
+        
+        label
+        {
+            line-height: 22px;
+    /* height: 22px; */
+    font-size: 16px;
+    font-weight: bold;
+    color: #f57224;
+    margin-top: -10px;
+        }
+
+        #itemlist > div > img
+        {
+            width:120px;
+            height:180px;
+            margin: 0 !important;
+            align-self: center;
+            /* margin-left: 20px;
+            margin-right: 20px; */
+
+            /* vertical-align: baseline; */
+            object-fit: contain;
+            transition:40ms ease-in;
+
+           
+        }
+
+        #itemlist > div
+        {
+            border:1px solid white;
+            border-radius:5px;
+            /* padding:20px; */
+            transition:40ms ease-in;
+
+        }
+
+        #itemlist > div:hover
+        {
+            /* transform: scale(1.02); */
+            border:1px solid #eee;
+  /* box-shadow: 1px 1px 5px #888888; */
+  border:5px solid;
+  border-image-slice: 1;
+  /* border-image-source: linear-gradient(to left, #00C853, #B2FF59); */
+  border-image-source: linear-gradient(to left, orange, rgb(165, 2, 130));
+
+  box-shadow: 1px 1px 2px #aaaaaa, -1px -1px 2px #aaaaaa;
+
+            /* transform: scale(1.3); */
+            /* border:0; */
+        }
+        
+        #itemlist > div:hover > img
+        {
+            /* transition: 2ms ease-in-out; */
+            /* transform: scale(1.3); */
+            /* transform: scale(1.3); */
+        }
+        
+        #itemlist > div > div
+        {
+        
+            padding:10px;
+        }
+        #itemlist > div > div >  p
+        {
+            font-family: Roboto-Regular,'Helvetica Neue',Helvetica,Tahoma,Arial,Sans-serif;
+            text-emphasis: ell;
+            text-overflow: ellipsis;
+            width:170px;
+            white-space: nowrap;
+            overflow: hidden;
+     
+        }
+    </style>
+</head>
+<body>
+<div id="itemlist">
+
+</div>
+
+<script>
+    $(()=>
+    {
+console.log("Ready");
+     $.ajax({
+         url:'/item',
+         method:'get',
+         success:(data)=>
+         {
+             console.log(data);
+            data.forEach(element => {
+                console.log(element);
+                    $('#itemlist').append(`
+                    <div>
+                        <img src=${element.image_src}></img>
+                        <div>
+                        <p>${element.name}</p>
+                        <label>${element.price}</label>
+                        </div>
+                        </div>`);                
+            });
+         },
+         error:(err)=>
+         {
+             console.log(err);
+         }
+     })
+
+    })
+    </script>
+</body>
+</html>
